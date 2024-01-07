@@ -8,5 +8,6 @@ import com.sqlDB.Entity.Category;
 public interface Category_Service {
 	
 	public List<Category> get(Connection con) throws SQLException;
+	public Category getByName(Connection con, String s) throws SQLException;
 
 }

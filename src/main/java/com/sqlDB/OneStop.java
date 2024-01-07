@@ -40,12 +40,24 @@ public class OneStop {
 		List<Category> categories = service3.get(con);
 		System.out.println("--- select * from category ---");
 		categories.stream().forEach(System.out::println);
+		System.out.print("getByName : ");
+		System.out.println(service3.getByName(con, "food"));
 		System.out.println("");
 		
 		Item_Service service4 = new Item_Service_Impl();
 		List<Item> items = service4.get(con);
 		System.out.println("--- select * from item ---");
 		items.stream().forEach(System.out::println);
+		
+//		Customer cus = new Customer();
+//		cus.setC_name("hla hla");
+//		cus.setC_ph("529101");
+//		Customer new_cus = service1.add(con, cus);
+//		System.out.println(new_cus);
+		
+		service1.deleteByName(con, "aung aung");
+
+		
 		
 	}
 

@@ -20,7 +20,7 @@ public class Voucher_Service_Impl implements Voucher_Service{
 		while(set.next()) {
 			Voucher c = new Voucher();
 			c.setV_id(set.getInt(1));
-			c.setDate(set.getString(2));
+			c.setDate(set.getDate(2).toLocalDate());
 			vouchers.add(c);
 		}
 		return vouchers;
