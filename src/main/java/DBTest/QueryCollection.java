@@ -87,6 +87,50 @@ public class QueryCollection {
 //	where studentName like '%yamamoto';
 	
 	
+//	Sorting of data
+//	select * from student order by studentName desc;
+//	select * from student order by gender, studentName desc;
+//	select * from student order by gender desc, studentName;
+
+	
+//	Limit
+//	select * from score;
+//	-- အမှတ်အများဆုံး 2 ခုလိုချင်ရင် => order by & limit
+//	select * from score order by score desc limit 2;
+//	-- အရှေ့က 2 က skip လုပ်သွားတဲ့ row အရေအတွက် => data ကို user အား ခွဲပြတဲ့အခါတွေမှာသုံးတယ် pagination ပုံစံမျိုး
+//	select * from score limit 2, 3;
+	
+	
+//	Joining the tables
+	
+//	select * from score;
+//	select * from student;
+//	-- cross join
+//	select * from score, student;
+//	-- equijoin = innerjoin
+//	select * from student s, score c where s.StudentNumber = c.studentNumber;
+//	select * from student s inner join score c on s.studentNumber = c.studentNumber;
+//	select StudentName, SubjectNumber, Score from student s
+//	inner join score c on s.studentNumber = c.studentNumber;
+//
+//	select s.*, SubjectName, Score from student s, score c, `subject` u
+//	where s.StudentNumber = c.studentNumber and c.subjectNumber = u.subjectNumber ;
+//
+//	-- record data တူတာမရှိလည်း ထုတ်ချင်တယ်ဆိုရင် outer join သုံး => left outer join, right outer join
+//	select * from score;
+//	select * from student;
+//	-- left join က အရင်လာတဲ့ table(left) ကို အတည်ယူပြီး ချိတ်ခြင်း
+//	select * from student s left join score sc on s.studentNumber = sc.studentNumber;
+//	-- -- left join က နောက်က table(right) ကို အတည်ယူပြီး ချိတ်ခြင်း
+//	select * from student s right join score sc on s.studentNumber = sc.studentNumber;
+//
+//	-- join လို့ပဲရေးရင် inner join
+//	select * from student s join score c on s.studentNumber = c.studentNumber;
+	
+	
+	
+	
+	
 	
 	
 	
