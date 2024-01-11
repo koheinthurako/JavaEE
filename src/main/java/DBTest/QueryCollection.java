@@ -128,9 +128,156 @@ public class QueryCollection {
 //	select * from student s join score c on s.studentNumber = c.studentNumber;
 	
 	
+//	EXERCIES
+	
+//	select * from student;
+//	select * from score;
+//	select * from subject;
+//	select distinct studentName from student s join score sc
+//	on s.studentNumber = sc.studentNumber and sc.score >= 80;
+//
+//	select studentName, sj.subjectName from student s, score sc, `subject` sj
+//	where s.studentNumber = sc.studentNumber and sj.subjectNumber = sc.subjectNumber and sc.score >= 80;
+//
+//	select studentName, count(*) as Distinction from student s
+//	join score sc on s.studentNumber = sc.studentNumber and sc.score >= 80
+//	group by studentName;
+//
+//	select subjectName, avg(sc.score) Average from score sc, `subject` sj
+//	where sc.subjectNumber = sj.subjectNumber
+//	group by subjectName;
+//
+//	select subjectName, count(*) totalPeople from score sc join `subject` sj
+//	on sc.subjectNumber = sj.subjectNumber
+//	group by subjectName
+//	order by totalPeople;
+//
+//	select studentName from student s join score sc
+//	on s.studentNumber = sc.studentNumber
+//	where sc.examinationDate = '2023-10-20' and s.gender = 'Male'
+//	group by studentName
+//	order by studentName;
 	
 	
+//	Creating View
 	
+//	-- Creating View (Virtual Table) မူရင်းမဟုတ်ပဲ တစ်ခုခုကနေထွက်လာတဲ့ table တစ်စိတ်တစ်ပိုင်းကို virtual ထုတ်ကြည့်ခြင်း
+//	-- view ကိုသုံးရင် application ဘက်က query ရေးစရာမလိုတော့ပဲ သက်သာသွားတယ်
+//	create view studentNames as
+//	select studentNumber, studentName from student;
+//	-- view table ကို data update လုပ်ရင် မူရင်း table မှာလည်းပြောင်းသွားတယ်
+//	-- view ကိုပြင်လို့ရမရက view table နဲ့ မူရင်း table တွေရဲ့ primary key တူတဲ့အပေါ်မှာမူတည်တယ် တူရင် နှစ်ခုလုံးပြောင်းတယ်
+//	update studentNames set studentName = 'Mone' where studentNumber = 6816;
+//	select * from studentNames;
+//
+//	create view distinctionCount as
+//	select studentName, count(*) as Distinction from student s
+//	join score sc on s.studentNumber = sc.studentNumber and sc.score >= 80
+//	group by studentName;
+//	select * from distinctionCount;
+//	-- အပေါ်ကလို aggreagate fun တွေကမှထွက်လာတဲ့ table တွေဆိုရင် view မှာသွားပြင်လို့မရတော့ဘူး
+//
+//	/*
+//		view ကိုသုံးရတဲ့အဓိကရည်ရွယ်ချက်က program တစ်ခုရေးလို့ database access မှတစ်ဆင့် data ယူတဲ့အခါ
+//	    အပေါ်က query အရှည်ကြီးထဲက Distinction 3 ခုရတဲ့ လူကိုယူချင်တယ်ဆိုပြီး လှမ်းယူတဲ့အခါ
+//	    program code တွေထဲမှာ အပေါ်ကအတိုင်း query အရှည်ကြီးရေးနေရမှာမို့ DB ထဲမှာပဲ juery အရှည်ကြီးရေးထားတဲ့ view ကို တည်ဆောက်ထားပြီးမှ
+//	    အောက်ကလို ကိုယ်လိုချင်တဲ့ program code ကို တိုတိုပြန်ရေးလို့လွယ်ကူသွားတဲ့အတွက် သုံးကြတာများတယ်
+//	    Base table ကနေ တည်ဆောက်ထားလို့ data consistency မဖြစ်မှာကိုလည်း စိုးရိမ်စရာမလို
+//	*/
+//	select * from distinctionCount
+//	where distinction >= 3;
+	
+	
+//	Sub Query
+	
+//	select * from score;
+//	-- သီးသန့် run လို့ရတဲ့ independent subquery
+//	 select studentName from student
+//	 where studentNumber in (
+//		select studentNumber from score
+//	    where examinationDate = '2023-10-20'
+//	 );
+//
+//	-- သီးသန့် မ run နိုင်တဲ့ correlation subquery
+//	select studentName from student s
+//	where exists (
+//		select * from score sc
+//	    where s.studentNumber = sc.studentNumber
+//	    and examinationDate = '2023-10-20'
+//	);
+//
+//	-- not exists ဆိုရင်တော့ ထွက်လာတဲ့ result ထဲမှာ မပါတဲ့ data ကိုထုတ်ပေးတယ်
+//	select studentName from student s
+//	where not exists (
+//		select * from score sc
+//	    where s.studentNumber = sc.studentNumber
+//	    and examinationDate = '2023-10-20'
+//	);
+//
+//	select studentName from student
+//	where studentNumber in  (
+//		select studentNumber from score
+//	    where score >= 80
+//	);
+//
+//	select * from score;
+//	select count(*), subjectNumber from score 
+//	group by subjectNumber
+//	having count(*) > 1;
+//
+//	select subjectName from subject
+//	where subjectNumber in (
+//		select subjectNumber from score 
+//		group by subjectNumber
+//		having count(*) > 1
+//	); 
+//
+//	select * from subject;
+//	select * from score;
+//	select subjectName from subject sj
+//	where exists (
+//		select subjectNumber from score sc
+//	    where sj.subjectNumber = sc.subjectNumber
+//		group by subjectNumber
+//		having count(*) > 1
+//	); 
+//
+//	select avg(score) from score group by subjectNumber;
+//	-- avg ရှာလိုက်တဲ့ တန်ဖိုးတွေထဲက တစ်ခုခုနဲ့ကြီးရင်ရပြီဆိုပြီး တိုက်စစ်တဲ့အတွက် အနည်းဆုံးဖြစ်တဲ့ 75 ထက်ကြီးတဲ့ data တွေထုတ်ပေးတယ်
+//	select * from score
+//	where score > any (
+//		select avg(score) from score group by subjectNumber
+//	);
+//
+//	select * from score
+//	where score > all (
+//		select avg(score) from score group by subjectNumber
+//	);
+//
+//
+//	-- subquery ကို table တစ်ခုအနေနဲ့ ယူသုံးခြင်း
+//	select studentNumber, count(*) distinction from score
+//	where score >= 80
+//	group by studentNumber;
+//
+//	-- subquery ကို table တစ်ခုအနေနဲ့ equi join ကိုသုံးပြီးတော့ function တစ်ခုလို subquery က ပြန်လာတဲ့ return ကိုအခြေခံ condition ထပ်စစ်ပြီးထုတ်
+//	select studentName, distinction from student s, (
+//		select studentNumber, count(*) distinction from score
+//		where score >= 80
+//		group by studentNumber
+//	) d where s.studentNumber = d.studentNumber;
+	
+	
+//	Using Case
+	
+//	-- Using Case => ထွက်လာတဲ့ record ကိုသူ့အတိုင်းမထုတ်ချင်ပဲ ပုံစံပြောင်းချင်ရင် case ကိုသုံးတယ်
+//		select studentNumber, subjectNumber, score,
+//		case 
+//			when score between 0 and 39 then 'Fail'
+//		    when score between 40 and 79 then 'Pass'
+//		    when score > 79 then 'Distinction'
+//		end as Grade
+//		from score;
 	
 	
 	
