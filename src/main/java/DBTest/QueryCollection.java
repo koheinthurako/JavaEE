@@ -46,5 +46,29 @@ public class QueryCollection {
 //	__________________________________________________________________________________________________________
 	
 	
+//	DML => Data Manipulation Language
+	
+//	select studentName from student;
+//	select * from student where gender = 'male';
+//	select * from student where gender <> 'male';
+//	select distinct gender from student;
+//
+//	select * from score;
+//	select * from score where score >= 65 and score <= 90;
+//	select * from score where score between 65 and 90;
+//	select * from score where score > 65 and subjectNumber = 'K21';
+//	select * from student where studentName like '%he%';
+//	select * from student  where studentName like '%yama____';
+//	select * from score where (subjectNumber like '%2%') or (score between 80 and 90);
+//	select * from score where score > 60 and (studentNumber like '_7__' or ExaminationDate = '2023-10-21');
+	
+//	Group By
+	
+	
+	
+	
+	
+	
+	
 
 }
