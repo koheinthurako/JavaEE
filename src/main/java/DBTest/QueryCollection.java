@@ -62,7 +62,29 @@ public class QueryCollection {
 //	select * from score where (subjectNumber like '%2%') or (score between 80 and 90);
 //	select * from score where score > 60 and (studentNumber like '_7__' or ExaminationDate = '2023-10-21');
 	
+	
 //	Group By
+	
+//	select count(*), sum(score), avg(score), min(score), max(score) from score;
+//	-- select နေရာမှာ group by နောက်က studentNumber ကိုပဲ ဆွဲထုတ်လို့ရတယ်
+//	select subjectNumber, max(score) from score group by subjectNumber;
+//	select subjectNumber, max(score) from score group by subjectNumber having max(score) >= 90;
+//	select studentNumber, sum(score), count(score) from score group by studentNumber having studentNumber = 6724;
+//
+//	-- where condition ကိုတော့ group by မတိုင်ခင်ရေးရတယ်
+//	select * from score;
+//	select subjectNumber, count(*) noOfstudents from score 
+//	where examinationDate = '2023-10-20'
+//	group by subjectNumber
+//	having count(*) > 1;
+//
+//	select count(distinct subjectNumber) noOfSubjects from score where examinationDate = '2023-10-20';
+//	select studentNumber, count(distinct examinationDate) as numberofDays from score group by StudentNumber;
+//
+//	select * from student;
+//	select gender, count(*) noOfstudents from student group by gender;
+//	select max(studentNumber) from student
+//	where studentName like '%yamamoto';
 	
 	
 	
