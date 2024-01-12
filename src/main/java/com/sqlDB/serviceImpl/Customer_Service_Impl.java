@@ -18,6 +18,8 @@ public class Customer_Service_Impl implements Customer_Service{
 		List<Customer> customers = new ArrayList<Customer>();
 		String sql = "select * from customer";
 		Statement stmt = con.createStatement();
+//		အောက်က executeQuery ကိုတော့ DML (select) query တွေမှာပဲသုံးတယ် return type က DB ကနေ row လိုက်ကြီးပြန်ထွက်လာတာမို့
+//		ResultSet ထဲပြန်ထည့်ပေးရတယ်
 		ResultSet set = stmt.executeQuery(sql);
 		while(set.next()) {
 			Customer c = new Customer();
@@ -57,7 +59,7 @@ public class Customer_Service_Impl implements Customer_Service{
 //		ResultSet set = stmt.executeQuery(sql);
 		boolean result = stmt.execute();
 		if(!result) {
-			String sql2 = "select * from customer where c_id = (select max(c_id) from customer";
+			String sql2 = "select * from customer where c_id = (select max(c_id) from customer)";
 			stmt = con.prepareStatement(sql2);
 			ResultSet set = stmt.executeQuery();
 			set.next();
@@ -78,6 +80,10 @@ public class Customer_Service_Impl implements Customer_Service{
 		String sql = "delete from customer where c_name like ?";
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1, name);
+//		အောက်က stmt.execute() က DDL, DML  အကုန်လုံးကို run ပေးနိုင်တယ် DML ဖြစ်တဲ့ select တို့ပါလာရင်
+//		DB ထဲမှာက return type က row လိုက်ကြီးထွက်လာလို့ execute() ကို run လိုက်ချိန် ပထမဆုံး output က row ကြီးဖြစ်နေရင်
+//		ResultSet ထဲထည့်ရမှာမို့ return true ပြန်ပေးတယ် အဲ့လိုမှမဟုတ်ပဲ တခြား DDL (update, insert, delete) တို့ဆိုရင်
+//		execute() ကို run လိုက်လို့ ResultSet ထဲထည့်စရာမလိုရင်တော့ return false ပြန်ပေးတယ်
 		stmt.execute();
 		System.out.println("Deleted");
 		return true;

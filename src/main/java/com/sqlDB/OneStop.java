@@ -49,13 +49,14 @@ public class OneStop {
 		System.out.println("--- select * from item ---");
 		items.stream().forEach(System.out::println);
 		
+//		System.out.println("--- Add new customer ---");
 //		Customer cus = new Customer();
-//		cus.setC_name("hla hla");
+//		cus.setC_name("mg mg");
 //		cus.setC_ph("529101");
 //		Customer new_cus = service1.add(con, cus);
 //		System.out.println(new_cus);
 		
-		service1.deleteByName(con, "aung aung");
+		service1.deleteByName(con, "mg mg");
 
 		
 		
