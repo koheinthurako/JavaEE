@@ -37,6 +37,14 @@ public class Test {
 	public void setLiveIn(String liveIn) {
 		this.liveIn = liveIn;
 	}
+	
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
 
 	@Override
 	public String toString() {
