@@ -12,5 +12,7 @@ public interface Item_Service {
 	public List<Item> get(Connection con) throws SQLException;
 	//get item names by specified category
 	public List<String> getByCategory(Connection con, Category category) throws SQLException;
+	public Item add(Connection con, Item item) throws SQLException;
+	public boolean deleteByID(Connection con, int id) throws SQLException;
 
 }

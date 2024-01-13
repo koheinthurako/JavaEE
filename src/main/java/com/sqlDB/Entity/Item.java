@@ -7,6 +7,15 @@ public class Item {
 	private int price;
 	private int stock;
 	private int category_id;
+	
+	public Item() {};
+	
+	public Item(String i_name, int price, int category_id) {
+		super();
+		this.i_name = i_name;
+		this.price = price;
+		this.category_id = category_id;
+	}
 
 	public int getI_id() {
 		return i_id;
