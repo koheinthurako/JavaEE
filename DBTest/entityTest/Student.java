@@ -33,6 +33,7 @@ public class Student {
 
 	@Override
 	public String toString() {
+		if(this.studentName==null) return String.format("%d\t%s", studentNumber, gender);
 		return String.format("%d\t%s\t\t%s", studentNumber, studentName, gender);
 	}
 

@@ -12,6 +12,8 @@ public interface studentServiceTest {
 //	သို့သော် အလုပ်လုပ်ဖို့ method တွေကိုတော့ serviceImplementation ထဲမှာပဲ override ရေးတယ်
 //	get() method ကိုခေါ်လိုက်တာနဲ့ student table တွေထဲက student တွေကို console မှာရိုက်ပြချင်တယ်ဆိုရင် return type က Object အနေနဲ့ပြန်မယ်
 	public List<Student> get(Connection con) throws SQLException;
-	
+	public Student insertStudent(Connection con, int id, String name, String gender) throws SQLException;
+	public boolean deleteByID(Connection con, int id) throws SQLException;
+	public List<Student> countGender(Connection con) throws SQLException;
 
 }

@@ -1,6 +1,7 @@
 package entiryServiceImplTest;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,10 +11,10 @@ import java.util.List;
 import entityServiceTest.studentServiceTest;
 import entityTest.Student;
 
-public class studentServiceImplTest implements studentServiceTest{
+public class studentServiceImplTest implements studentServiceTest {
 
 //	ဒီထဲမှာကတော့ implementation ဆိုသည့်အတိုင်း method တွေစရေးမယ်
-	
+
 	@Override
 	public List<Student> get(Connection con) throws SQLException {
 		List<Student> students = new ArrayList<Student>();
@@ -30,8 +31,8 @@ public class studentServiceImplTest implements studentServiceTest{
 //		stmt က statement ဖြစ်သွားပြီမို့ executeQuery() နဲ့ String ကိုထည့်ပြီး run လိုက်တယ် return က ResultSet မို့ ResultSet နဲ့ပြန်လက်ခံ
 //		DB ကနေ ယူလိုက်တဲ့ data တွေကို java ဘက်မှာ ResultSet နဲ့ ပြန်လက်ခံပေးရမယ်
 		ResultSet set = stmt.executeQuery(sql);
-//		set ထဲက data တွေက DB ကနေပြန်လာတဲ့ object တွေဖြစ်နေတော့ java ဘက်မှာ object အကုန်လုံးကို loop ပတ်ပြီး collection တစ်ခုထဲပြန်လက်ခံရမယ်
-		while(set.next()) {
+//		set ထဲက data တွေက DB ကနေပြန်လာတဲ့ column တွေဖြစ်နေတော့ java ဘက်မှာ set ပြန်လုပ်ပြီး collection တစ်ခုထဲပြန်လက်ခံရမယ်
+		while (set.next()) {
 //			loop ပတ်ပြီး စလက်ခံမယ် set ထဲမှာ data မကုန်မချင်း loop ပတ်မှာမို့ condition ကို set.next() နဲ့ စစ်တယ်
 //			set.getInt() ထဲက parameter ထဲမှာ DB column index ကိုထည့်ပေးရတယ် column index က DB မှာ 1 က စတယ်
 //			column index မထည့်ချင်ရင် "studentName" နာမည်တိုက်ရိုက်ပေးပြီး ထည့်လို့ရတယ်
@@ -45,7 +46,7 @@ public class studentServiceImplTest implements studentServiceTest{
 			s.setGender(set.getString(3));
 //			ဒါဆိုရင်တော့ object တွေကန သက်ဆိုင်ရင် class ထဲကို object တစ်ခုရောက်သွားပြီမို့ output ထုတ်ဖို့ အပေါ်ဆုံးက arrayList ထဲကိုထည့်မယ်
 			students.add(s);
-//			ဒါဆိုရင်တော့ collection ရဲ့အလုပ်လုပ်တဲ့အတိုင်း student  class ထဲက toString() method မှာ return ပြန်ထားတဲ့ value တွေက
+//			ဒါဆိုရင်တော့ collection ရဲ့အလုပ်လုပ်တဲ့အတိုင်း student class ထဲက object တွေက
 //			students ဆိုတဲ့ collection ထဲကို object အလိုက်ရောက်သွားပြီ
 //			အားလုံးပြီးသွားတော့မှ return မှာ students ပြန်လိုက်တယ်
 		}
@@ -58,7 +59,53 @@ public class studentServiceImplTest implements studentServiceTest{
 //		ဒီကနေ ပြန်သွားတဲ့ return က students ဆိုတဲ့ object ကြီး အဲ့တာကို OneStopTest ထဲမှာ Collection တစ်ခုထဲထည့်ပြီးမှ
 //		loop ပတ်ပြီး ပြန်ထုတ်ပြပေးရတယ်
 	}
-	
-	
+
+	@Override
+	public Student insertStudent(Connection con, int id, String name, String gender) throws SQLException {
+		Student stu = new Student();
+		String sql = "insert into student values (?,?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, id);
+		stmt.setString(2, name);
+		stmt.setString(3, gender);
+		boolean checker = stmt.execute();
+		if (!checker) {
+			String sql2 = "select * from student where studentNumber = ?";
+			stmt = con.prepareStatement(sql2);
+			stmt.setInt(1, id);
+			ResultSet set = stmt.executeQuery();
+			set.next();
+			stu.setStudentNumber(set.getInt(1));
+			stu.setStudentName(set.getString(2));
+			stu.setGender(set.getString(3));
+			return stu;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteByID(Connection con, int id) throws SQLException {
+		String sql = "delete from student where studentNumber = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, id);
+		stmt.execute();
+		System.err.println("Deleted!");
+		return true;
+	}
+
+	@Override
+	public List<Student> countGender(Connection con) throws SQLException {
+		List<Student> students = new ArrayList<Student>();
+		String sql = "select count(*), gender from student group by gender";
+		Statement stmt = con.createStatement();
+		ResultSet set = stmt.executeQuery(sql);
+		while(set.next()) {
+			Student stu = new Student();
+			stu.setStudentNumber(set.getInt(1));
+			stu.setGender(set.getString(2));
+			students.add(stu);
+		}
+		return students;
+	}
 
 }
