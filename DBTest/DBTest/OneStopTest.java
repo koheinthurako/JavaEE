@@ -4,10 +4,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.mysql.cj.protocol.Resultset;
+
+import entiryServiceImplTest.scoreServiceImplTest;
 import entiryServiceImplTest.studentServiceImplTest;
 import entiryServiceImplTest.subjectServiceImplTest;
+import entityServiceTest.scoreServiceTest;
 import entityServiceTest.studentServiceTest;
 import entityServiceTest.subjectServiceTest;
+import entityTest.Score;
 import entityTest.Student;
 
 public class OneStopTest {
@@ -20,11 +25,11 @@ public class OneStopTest {
 		// For Student
 		studentServiceTest stuService = new studentServiceImplTest();
 		
-		// For Score
-		
-		
 		// For Subject
 		subjectServiceTest subService = new subjectServiceImplTest();
+		
+		// For Score
+		scoreServiceTest scoreService = new scoreServiceImplTest();
 		
 //		DML for Student
 		System.out.println("--- Select * from student ---");
@@ -59,6 +64,13 @@ public class OneStopTest {
 		
 //		System.out.println("\n--- select * from subject where subjectNumber = K22 ---");
 //		subService.deleteSubject(con, "K22");
+		
+		
+		
+//		DML for Score
+		System.out.println("\n--- select * from score ---");
+		List<Score> scores = scoreService.getAll(con);
+		scores.stream().forEach(System.out::println);
 		
 		
 		
