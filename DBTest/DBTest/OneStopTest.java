@@ -2,11 +2,12 @@ package DBTest;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import entiryServiceImplTest.studentServiceImplTest;
+import entiryServiceImplTest.subjectServiceImplTest;
 import entityServiceTest.studentServiceTest;
+import entityServiceTest.subjectServiceTest;
 import entityTest.Student;
 
 public class OneStopTest {
@@ -23,7 +24,7 @@ public class OneStopTest {
 		
 		
 		// For Subject
-		
+		subjectServiceTest subService = new subjectServiceImplTest();
 		
 //		DML for Student
 		System.out.println("--- Select * from student ---");
@@ -40,6 +41,26 @@ public class OneStopTest {
 		
 //		System.out.println("\n--- insert into student values (6726, 'Thet Zaw Hein', 'Male') ---");
 //		System.out.println(stuService.insertStudent(con, 6726, "Thet Zaw Hein", "Male"));
+		
+		
+		
+//		DML for Subject
+		System.out.println("\n--- select * from subject ---");
+		List<entityTest.Subject> subjects = subService.getAll(con);
+		subjects.stream().forEach(System.out::println);
+		
+		System.out.println("\n--- select * from subject where subjectNumber = K11 ---");
+		System.out.println(subService.getByID(con, "K11"));
+		
+		
+//		DDL for Subject
+//		System.out.println("\n--- insert into subject values (K22, Physics) ---");
+//		System.out.println(subService.insertSubject(con, "K22", "Physics"));
+		
+//		System.out.println("\n--- select * from subject where subjectNumber = K22 ---");
+//		subService.deleteSubject(con, "K22");
+		
+		
 		
 	}
 

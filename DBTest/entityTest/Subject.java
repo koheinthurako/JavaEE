@@ -1,6 +1,6 @@
 package entityTest;
 
-public class subjectTest {
+public class Subject {
 
 	private String SubjectNumber;
 	private String SubjectName;

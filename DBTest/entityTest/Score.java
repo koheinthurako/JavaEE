@@ -1,6 +1,6 @@
 package entityTest;
 
-public class ScoreTest {
+public class Score {
 
 	private int studentNumber;
 	private String subjectNumber;
