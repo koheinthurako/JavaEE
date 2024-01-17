@@ -1,4 +1,4 @@
-package DBTest;
+package QueryCollection;
 
 public class QueryCollection {
 	
@@ -280,6 +280,13 @@ public class QueryCollection {
 //		from score;
 	
 	
+	
+//	Stored Procedure
+	
+//	Stored Procedure ဆိုတာဘာလဲ? => java ထဲမှာလို method တွေကို Database မှာရေးနိုင်တဲ့ feature
+//	ဥပမာ : score တစ်ခုအသစ်ထည့်လိုက်လို့ values ထဲမှာ score မပါလာဘူးဆိုရင် တန်ဖိုးကို default ကို auto "40" ဖြစ်အောင်ထည့်ပေးမယ်
+//	StoredProcedured.java ထဲမှာ procedure တစ်ခုကိုထည့်လိုက်ပြီ အဲ့တာကို အောက်မှာ call ပြီး score အသစ်တစ်ခုထပ်ထည့်လိုက်တယ်
+//	call add_score(6726, 'K12', '2023-10-21');
 	
 	
 	
