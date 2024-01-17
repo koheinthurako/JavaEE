@@ -72,7 +72,20 @@ public class OneStopTest {
 		List<Score> scores = scoreService.getAll(con);
 		scores.stream().forEach(System.out::println);
 		
+		System.out.println("\n--- select st.studentName 'Name', max(score) 'High Score' from score sc, student st\r\n"
+				+ "where sc.studentNumber = st.studentNumber\r\n"
+				+ "group by sc.studentNumber ---");
+		List<Object> highScore = scoreService.getHighScore(con);
+		highScore.stream().forEach(System.out::println);
 		
+		
+		
+//		DDL for Score
+//		System.out.println("\n--- insert into score values (6726, 'K21', 96, '2023-10-21') ---");
+//		System.out.println(scoreService.insertScore(con, 6726, "K21", 96, "2023-10-21"));
+		
+//		System.out.println("\n--- delete from score where studentNumber = 6726 and subjectNumber = 'K21' ---");
+//		scoreService.deleteScore(con, 6726, "K21");
 		
 	}
 
