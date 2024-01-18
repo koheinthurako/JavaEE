@@ -53,7 +53,6 @@ public class OneStopTest {
 		
 		
 		
-		
 //		DML for Subject
 		System.out.println("\n--- select * from subject ---");
 		List<entityTest.Subject> subjects = subService.getAll(con);

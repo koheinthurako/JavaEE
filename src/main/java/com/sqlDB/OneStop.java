@@ -3,6 +3,7 @@ package com.sqlDB;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import com.sqlDB.Entity.Category;
 import com.sqlDB.Entity.Customer;
@@ -75,12 +76,21 @@ public class OneStop {
 		Customer cus = new Customer();
 		cus.setC_name("aye aye");
 		List<Purchase_Voucher> list = service5.getByCustomer(con, cus);
-		int total = 0;
-		for(Purchase_Voucher v : list) {
-			System.out.println(v);
-			total += v.getAmount();
-		}
-		System.out.println(total);
+		
+//		Calculate Total
+//		int total = 0;
+//		for(Purchase_Voucher v : list) {
+//			System.out.println(v);
+//			total += v.getAmount();
+//		}
+//		System.out.println(total);
+		
+//		Calculate total using stream().reduce();
+		list.stream().forEach(System.out::println);
+		List<Integer> price = list.stream().map(obj -> obj.getAmount()).toList();
+		Optional<Integer> totalAmount = price.stream().reduce((start, end) -> start+end);
+		System.out.println("==========================================================");
+		System.out.println("Total amount : " + totalAmount.get() + "MMK");
 		
 	}
 
