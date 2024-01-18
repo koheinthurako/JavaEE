@@ -47,6 +47,11 @@ public class OneStopTest {
 //		System.out.println("\n--- insert into student values (6726, 'Thet Zaw Hein', 'Male') ---");
 //		System.out.println(stuService.insertStudent(con, 6726, "Thet Zaw Hein", "Male"));
 		
+//		System.out.println("\n--- create view studentNames as select studentNumber, studentName from student ---");
+//		List<Student> studentList = stuService.createView(con);
+//		studentList.stream().forEach(System.out::println);
+		
+		
 		
 		
 //		DML for Subject

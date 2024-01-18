@@ -15,5 +15,7 @@ public interface studentServiceTest {
 	public Student insertStudent(Connection con, int id, String name, String gender) throws SQLException;
 	public boolean deleteByID(Connection con, int id) throws SQLException;
 	public List<Student> countGender(Connection con) throws SQLException;
+//	အောက်မှာ gender မပါတဲ့ studentList View တစ်ခုဆောက်မယ်
+	public List<Student> createView(Connection con) throws SQLException;
 
 }

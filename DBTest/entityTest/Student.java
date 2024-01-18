@@ -34,6 +34,7 @@ public class Student {
 	@Override
 	public String toString() {
 		if(this.studentName==null) return String.format("%d\t%s", studentNumber, gender);
+		else if(this.gender==null) return String.format("%d\t%s", studentNumber, studentName);
 		return String.format("%d\t%s\t\t%s", studentNumber, studentName, gender);
 	}
 

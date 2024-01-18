@@ -108,4 +108,22 @@ public class studentServiceImplTest implements studentServiceTest {
 		return students;
 	}
 
+	@Override
+	public List<Student> createView(Connection con) throws SQLException {
+		String sql = "create view studentList as select studentNumber, studentName from student";
+		Statement stmt = con.createStatement();
+		stmt.execute(sql);
+		System.out.println("Successfully created view!");
+		String sql2 = "select * from studentList";
+		ResultSet set = stmt.executeQuery(sql2);
+		List<Student> students = new ArrayList<Student>();
+		while(set.next()) {
+			Student stu = new Student();
+			stu.setStudentNumber(set.getInt(1));
+			stu.setStudentName(set.getString(2));
+			students.add(stu);
+		}
+		return students;
+	}
+
 }
